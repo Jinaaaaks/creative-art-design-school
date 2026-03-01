@@ -1,0 +1,42 @@
+<!--
+  ════════════════════════════════════════════════════════
+  FORMA STUDIO — header.html
+
+  ⚠️  THIS IS A SNIPPET FILE, NOT A STANDALONE PAGE.
+  Opening it directly in a browser will show a blank
+  screen — that is expected behaviour.
+
+  HOW TO USE:
+  Copy the <nav> block below and paste it at the top of
+  any new page's <body>, before your page content.
+  Then set class="active" on the link that matches the
+  current page.
+
+  AUTH PAGES (login, register):
+  Do NOT include this nav. Instead add:
+    • class="no-nav" to your <body> tag
+    • <a href="home.html" class="back-link">Home</a>
+      as the first element inside <body>
+
+  The nav is already embedded in all 5 existing pages.
+  This file is a reference copy only.
+  ════════════════════════════════════════════════════════
+-->
+<nav>
+  <a class="nav-logo" href="home.html">
+    <div class="nav-logo-mark"><div class="nav-logo-mark-inner"></div></div>
+    Forma Studio
+  </a>
+  <ul class="nav-links">
+    <li><a href="home.html">Home</a></li>
+    <li><a href="program.html">Courses</a></li>
+    <li><a href="help.html">Help</a></li>
+  </ul>
+  <div class="nav-auth">
+    <a class="nav-login" href="login.html">Log in</a>
+    <a class="nav-reg" href="register.html">Enrol Now</a>
+  </div>
+  <button class="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
