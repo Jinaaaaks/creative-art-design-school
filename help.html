@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help & Contact — Forma Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+
+.page-hero {
+  padding: calc(var(--nav-h) + 80px) 40px 80px;
+  background: white; border-bottom: 1px solid var(--border);
+}
+.page-hero-inner { max-width: var(--max); margin: 0 auto; }
+.page-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  font-weight: 900; color: var(--ink); letter-spacing: -2px;
+  line-height: 1.05; margin-bottom: 20px; max-width: 600px;
+}
+.page-hero h1 em { font-style: italic; color: var(--coral); }
+.page-hero p { font-size: 1.05rem; color: var(--mid); line-height: 1.75; max-width: 480px; margin-bottom: 32px; }
+
+.search-wrap { position: relative; max-width: 440px; }
+.search-wrap input {
+  width: 100%; padding: 14px 50px 14px 18px;
+  border: 1.5px solid var(--border);
+  font-family: 'DM Sans', sans-serif; font-size: 0.92rem;
+  color: var(--ink); outline: none; background: var(--bg);
+  transition: border-color 0.18s;
+}
+.search-wrap input:focus { border-color: var(--ink); background: white; }
+.search-wrap input::placeholder { color: var(--soft); }
+.search-icon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--soft); font-size: 0.9rem; pointer-events: none; }
+
+/* CONTACT CARDS */
+.contact-section { padding: 100px 40px; background: var(--bg); }
+.contact-inner { max-width: var(--max); margin: 0 auto; }
+.contact-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 48px; }
+.contact-card {
+  background: white; padding: 40px 36px;
+  transition: background 0.2s;
+}
+.contact-card:hover { background: var(--stone); }
+.cc-num { font-family: 'Playfair Display', serif; font-size: 0.72rem; font-weight: 700; color: var(--coral); letter-spacing: 0.12em; margin-bottom: 20px; display: block; }
+.cc-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.cc-val { font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+.cc-sub { font-size: 0.82rem; color: var(--mid); line-height: 1.65; margin-bottom: 24px; }
+.cc-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.82rem; font-weight: 700; color: var(--coral);
+  text-decoration: none; transition: gap 0.2s;
+  letter-spacing: 0.02em;
+}
+.cc-btn:hover { gap: 12px; }
+
+/* FAQ */
+.faq-section { padding: 100px 40px; background: white; border-top: 1px solid var(--border); }
+.faq-inner { max-width: var(--max); margin: 0 auto; }
+.faq-layout { display: grid; grid-template-columns: 280px 1fr; gap: 80px; margin-top: 48px; }
+.faq-sidebar .eyebrow { margin-bottom: 16px; }
+.faq-sidebar h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 700; color: var(--ink);
+  margin-bottom: 12px; line-height: 1.3;
+}
+.faq-sidebar p { font-size: 0.84rem; color: var(--mid); line-height: 1.7; margin-bottom: 24px; }
+.faq-sidebar a {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.84rem; font-weight: 700; color: var(--coral);
+  text-decoration: none;
+}
+
+.faq-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item:last-child { border-bottom: none; }
+.faq-q {
+  width: 100%; background: none; border: none; text-align: left; cursor: pointer;
+  padding: 22px 28px; display: flex; justify-content: space-between; align-items: center;
+  font-family: 'DM Sans', sans-serif; font-size: 0.92rem; font-weight: 600; color: var(--ink);
+  transition: background 0.18s;
+}
+.faq-q:hover { background: var(--stone); }
+.faq-arrow { font-size: 0.8rem; color: var(--soft); transition: transform 0.25s; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s;
+  font-size: 0.88rem; color: var(--mid); line-height: 1.8;
+}
+.faq-item.open .faq-a { max-height: 400px; padding: 0 28px 22px; }
+
+/* CONTACT FORM */
+.form-section { padding: 100px 40px; background: var(--bg); }
+.form-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.form-text .section-h { margin-bottom: 16px; }
+.form-text .section-p { margin-bottom: 32px; }
+.form-text-detail { display: flex; flex-direction: column; gap: 20px; }
+.ftd-item { display: flex; gap: 16px; align-items: flex-start; }
+.ftd-bullet { width: 6px; height: 6px; background: var(--coral); flex-shrink: 0; margin-top: 8px; }
+.ftd-text strong { display: block; font-weight: 600; color: var(--ink); font-size: 0.88rem; margin-bottom: 2px; }
+.ftd-text span { font-size: 0.82rem; color: var(--soft); }
+
+.form-wrap { background: white; border: 1px solid var(--border); padding: 48px; }
+.fg { margin-bottom: 16px; }
+.fg label { display: block; font-weight: 600; font-size: 0.78rem; margin-bottom: 7px; color: var(--ink); letter-spacing: 0.01em; }
+.req { color: var(--coral); }
+.fg input, .fg select, .fg textarea {
+  width: 100%; padding: 12px 16px; border: 1.5px solid var(--border);
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none;
+  transition: border-color 0.18s; background: var(--bg); color: var(--ink);
+}
+.fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--ink); background: white; }
+.fg textarea { resize: vertical; min-height: 120px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.btn-send {
+  width: 100%; padding: 15px; margin-top: 8px;
+  background: var(--ink); color: white;
+  font-family: 'DM Sans', sans-serif; font-weight: 700;
+  font-size: 0.9rem; border: none; cursor: pointer;
+  transition: background 0.2s; letter-spacing: 0.02em;
+}
+.btn-send:hover { background: var(--coral); }
+
+@media (max-width: 960px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .faq-layout { grid-template-columns: 1fr; gap: 40px; }
+  .form-inner { grid-template-columns: 1fr; gap: 48px; }
+  .page-hero, .contact-section, .faq-section, .form-section { padding-left: 20px; padding-right: 20px; }
+  .form-row { grid-template-columns: 1fr; }
+  .form-wrap { padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="home.html">
+      <div class="nav-logo-mark"><svg viewBox="0 0 14 14"><polygon points="7,1 13,7 7,13 1,7"/></svg></div>
+      <span class="nav-logo-text">Forma</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="program.html">Courses</a></li>
+      <li><a href="help.html" class="active">Help</a></li>
+    </ul>
+    <div class="nav-auth">
+      <a class="nav-login" href="login.html">Log in</a>
+      <a class="nav-reg" href="register.html">Apply Now</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="eyebrow">Support</span>
+    <h1>How can we <em>help?</em></h1>
+    <p>Browse our frequently asked questions or get in touch directly. We respond to all messages within one business day.</p>
+    <div class="search-wrap">
+      <input type="text" placeholder="Search FAQs…" id="faqSearch">
+      <span class="search-icon">→</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CARDS -->
+<section class="contact-section">
+  <div class="contact-inner">
+    <div class="fade-up">
+      <span class="eyebrow">Get in Touch</span>
+      <h2 class="section-h">We are real people.</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card fade-up">
+        <span class="cc-num">01</span>
+        <div class="cc-title">Email</div>
+        <div class="cc-val">hello@formastudio.co</div>
+        <p class="cc-sub">For general enquiries, application questions, and partnership requests. Response within one business day.</p>
+        <a href="mailto:hello@formastudio.co" class="cc-btn">Send an email →</a>
+      </div>
+      <div class="contact-card fade-up" data-delay="80">
+        <span class="cc-num">02</span>
+        <div class="cc-title">Phone</div>
+        <div class="cc-val">+44 20 7946 0000</div>
+        <p class="cc-sub">Monday to Friday, 9am–5pm GMT. For urgent matters or if you'd prefer to speak with someone directly.</p>
+        <a href="tel:+442079460000" class="cc-btn">Call us →</a>
+      </div>
+      <div class="contact-card fade-up" data-delay="160">
+        <span class="cc-num">03</span>
+        <div class="cc-title">Studio</div>
+        <div class="cc-val">14 Kempton Street, London</div>
+        <p class="cc-sub">Open studios on the first Saturday of each month — no appointment needed. Bring your portfolio.</p>
+        <a href="#" class="cc-btn">Get directions →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner fade-up">
+    <div>
+      <span class="eyebrow">FAQ</span>
+      <h2 class="section-h">Common questions.</h2>
+    </div>
+    <div class="faq-layout">
+      <div class="faq-sidebar">
+        <p>Can't find what you're looking for? Use the search above or drop us a message below.</p>
+        <a href="#contact-form">Send a message →</a>
+      </div>
+      <div class="faq-list" id="faqList">
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">How do I apply? <span class="faq-arrow">↓</span></button>
+          <div class="faq-a">Click "Apply Now" on any page and complete the application form. We review all applications and respond within five business days. There is no fee to apply.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Do I need prior design experience? <span class="faq-arrow">↓</span></button>
+          <div class="faq-a">It depends on the course. Our Foundation courses — Visual Design Intensive and Drawing for Designers — accept complete beginners. Intermediate and Advanced courses require some prior design exposure. When in doubt, apply and we'll advise you on the right starting point.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">How large are the cohorts? <span class="faq-arrow">↓</span></button>
+          <div class="faq-a">We cap every cohort at twelve students. This is deliberate — we believe meaningful critique and instructor attention require a small group. It also means spaces are limited and fill up quickly each intake.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">What software will I need? <span class="faq-arrow">↓</span></button>
+          <div class="faq-a">Most courses use Adobe Creative Suite (Illustrator, InDesign, Photoshop, After Effects). A subscription to Creative Cloud is recommended. Some courses also use Figma, which is free. We provide full software lists after acceptance.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Are online courses the same quality? <span class="faq-arrow">↓</span></button>
+          <div class="faq-a">Yes. Online courses follow the same curriculum, same faculty, and same critique structure as on-site courses. Sessions are live, not pre-recorded. The only difference is you are not in the same room as your cohort — though many online students tell us the asynchronous flexibility suits them well.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">What do I get at the end of a course? <span class="faq-arrow">↓</span></button>
+          <div class="faq-a">Every course concludes with a final project and a group critique. You will have portfolio-ready work, instructor feedback notes, and a certificate of completion from Forma Studio. Alumni also receive ongoing access to our graduate community.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Can my company sponsor my place? <span class="faq-arrow">↓</span></button>
+          <div class="faq-a">Yes — we handle corporate invoicing and can issue documentation required for employer reimbursement or training budgets. Get in touch at hello@formastudio.co with the subject line "Corporate Sponsorship" and we will assist.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="form-section" id="contact-form">
+  <div class="form-inner">
+    <div class="form-text fade-up">
+      <span class="eyebrow">Message Us</span>
+      <h2 class="section-h">Still have a question?</h2>
+      <p class="section-p">We read every message and reply within one working day. No bots, no templates.</p>
+      <div class="form-text-detail">
+        <div class="ftd-item">
+          <div class="ftd-bullet"></div>
+          <div class="ftd-text"><strong>Applications</strong><span>Questions about applying or course suitability</span></div>
+        </div>
+        <div class="ftd-item">
+          <div class="ftd-bullet"></div>
+          <div class="ftd-text"><strong>Course Content</strong><span>What you'll make, tools, schedule, outcomes</span></div>
+        </div>
+        <div class="ftd-item">
+          <div class="ftd-bullet"></div>
+          <div class="ftd-text"><strong>Partnerships</strong><span>Corporate training, sponsorship, collaborations</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-wrap fade-up" data-delay="120">
+      <form onsubmit="handleContact(event)" novalidate>
+        <div class="form-row">
+          <div class="fg"><label>Your Name <span class="req">*</span></label><input type="text" placeholder="Priya Atkinson" required></div>
+          <div class="fg"><label>Email <span class="req">*</span></label><input type="email" placeholder="priya@example.com" required></div>
+        </div>
+        <div class="fg">
+          <label>Topic</label>
+          <select>
+            <option value="">Select…</option>
+            <option>Application Query</option>
+            <option>Course Content</option>
+            <option>Scheduling & Format</option>
+            <option>Corporate / Sponsorship</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="fg"><label>Message <span class="req">*</span></label><textarea placeholder="Your question or message…" required></textarea></div>
+        <button type="submit" class="btn-send">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="footer-logo" href="home.html">
+        <div class="footer-logo-mark"><svg viewBox="0 0 14 14"><polygon points="7,1 13,7 7,13 1,7"/></svg></div>
+        <span class="footer-logo-text">Forma</span>
+      </a>
+      <p class="footer-tagline">A creative arts and design school for students who are serious about the craft of visual communication.</p>
+      <div class="footer-socials">
+        <a class="social-btn" href="#" aria-label="Instagram">Ig</a>
+        <a class="social-btn" href="#" aria-label="LinkedIn">Li</a>
+        <a class="social-btn" href="#" aria-label="Twitter">Tw</a>
+        <a class="social-btn" href="#" aria-label="Behance">Be</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>School</h4><ul><li><a href="home.html">Home</a></li><li><a href="program.html">Courses</a></li><li><a href="help.html">Help & FAQ</a></li><li><a href="register.html">Apply Now</a></li></ul></div>
+    <div class="footer-col"><h4>Community</h4><ul><li><a href="#">Alumni</a></li><li><a href="#">Faculty</a></li><li><a href="#">Exhibitions</a></li><li><a href="#">Open Days</a></li></ul></div>
+    <div class="footer-col"><h4>Info</h4><ul><li><a href="help.html">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li><li><a href="login.html">Staff Login</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Forma Studio. All rights reserved.</span>
+    <span>Design is a discipline, not a decoration.</span>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+document.getElementById('faqSearch').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const text = item.textContent.toLowerCase();
+    item.style.display = text.includes(q) ? '' : 'none';
+  });
+});
+
+function handleContact(e) {
+  e.preventDefault();
+  showToast('Message sent — we will reply within one business day.');
+}
+</script>
+</body>
+</html>

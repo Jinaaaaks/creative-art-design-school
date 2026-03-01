@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log In — Forma Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+body { height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+
+.page-wrap {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+}
+
+/* LEFT */
+.left-panel {
+  background: var(--ink);
+  padding: 0 72px;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  position: relative; overflow: hidden;
+}
+
+/* Geometric background lines */
+.left-panel::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.lp-logo {
+  position: absolute; top: 40px; left: 72px;
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.lp-logo-mark { width: 28px; height: 28px; background: var(--coral); display: flex; align-items: center; justify-content: center; }
+.lp-logo-mark svg { width: 13px; height: 13px; fill: white; }
+.lp-logo-text { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem; color: white; }
+
+.lp-inner { position: relative; z-index: 1; }
+.lp-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--coral); margin-bottom: 20px; display: block; }
+.lp-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 700; color: white;
+  line-height: 1.15; margin-bottom: 18px; letter-spacing: -0.5px;
+}
+.lp-title em { font-style: italic; color: rgba(255,255,255,0.4); }
+.lp-sub { font-size: 0.88rem; color: rgba(255,255,255,0.38); line-height: 1.75; margin-bottom: 48px; max-width: 340px; }
+
+/* Role cards */
+.role-cards { display: flex; flex-direction: column; gap: 0; border: 1px solid rgba(255,255,255,0.08); }
+.role-card {
+  display: flex; align-items: center; gap: 16px;
+  padding: 18px 20px; cursor: pointer;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: background 0.18s;
+}
+.role-card:last-child { border-bottom: none; }
+.role-card:hover { background: rgba(255,255,255,0.04); }
+.role-card.selected { background: rgba(232,72,10,0.12); border-left: 2px solid var(--coral); }
+.role-card-icon {
+  width: 36px; height: 36px; background: rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.role-card-icon svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.5); }
+.role-card.selected .role-card-icon svg { fill: var(--coral); }
+.role-card-text strong { display: block; font-weight: 600; color: white; font-size: 0.86rem; margin-bottom: 2px; }
+.role-card-text span { font-size: 0.74rem; color: rgba(255,255,255,0.35); }
+.role-check {
+  margin-left: auto; width: 18px; height: 18px;
+  border: 1.5px solid rgba(255,255,255,0.15); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.role-card.selected .role-check { background: var(--coral); border-color: var(--coral); }
+.role-card.selected .role-check::after { content: '✓'; font-size: 0.65rem; font-weight: 800; color: white; }
+
+/* RIGHT */
+.right-panel {
+  background: var(--bg);
+  padding: 0 80px;
+  display: flex; flex-direction: column;
+  justify-content: center; overflow-y: auto;
+}
+
+.form-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--coral); margin-bottom: 12px; display: block; }
+.form-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.5px; }
+.form-sub { font-size: 0.88rem; color: var(--mid); line-height: 1.65; margin-bottom: 28px; }
+.form-sub a { color: var(--coral); font-weight: 600; text-decoration: none; }
+
+/* Role toggle */
+.role-toggle {
+  display: flex; gap: 0; background: var(--stone2);
+  border: 1px solid var(--border); margin-bottom: 28px;
+}
+.role-btn {
+  flex: 1; padding: 10px; background: transparent; border: none;
+  font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.84rem;
+  cursor: pointer; transition: all 0.18s; color: var(--soft);
+  border-right: 1px solid var(--border);
+}
+.role-btn:last-child { border-right: none; }
+.role-btn.active { background: white; color: var(--ink); }
+
+/* Info box */
+.info-box {
+  background: white; border: 1px solid var(--border); border-left: 3px solid var(--coral);
+  padding: 14px 18px; margin-bottom: 24px; display: flex; gap: 12px;
+  font-size: 0.82rem; color: var(--mid); line-height: 1.6;
+}
+.info-box strong { color: var(--ink); }
+
+.fg { margin-bottom: 16px; }
+.fg label { display: block; font-weight: 600; font-size: 0.78rem; margin-bottom: 7px; color: var(--ink); }
+.req { color: var(--coral); }
+.fg input {
+  width: 100%; padding: 13px 16px; border: 1.5px solid var(--border);
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none;
+  transition: border-color 0.18s; background: white; color: var(--ink);
+}
+.fg input:focus { border-color: var(--ink); }
+.pw-wrap { position: relative; }
+.pw-wrap input { padding-right: 48px; }
+.pw-toggle {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer; font-size: 0.75rem;
+  font-weight: 700; color: var(--soft); letter-spacing: 0.06em; text-transform: uppercase;
+  transition: color 0.18s;
+}
+.pw-toggle:hover { color: var(--ink); }
+
+.forgot {
+  display: block; text-align: right; font-size: 0.78rem; font-weight: 600;
+  color: var(--soft); text-decoration: none; margin-top: -8px; margin-bottom: 20px;
+  transition: color 0.18s;
+}
+.forgot:hover { color: var(--ink); }
+
+.btn-signin {
+  width: 100%; padding: 15px; background: var(--ink); color: white;
+  font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.95rem;
+  border: none; cursor: pointer; transition: background 0.2s; letter-spacing: 0.02em;
+}
+.btn-signin:hover { background: var(--coral); }
+
+.divider { display: flex; align-items: center; gap: 14px; margin: 22px 0; font-size: 0.76rem; font-weight: 600; color: var(--soft); }
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+.btn-apply {
+  width: 100%; padding: 13px; background: transparent; color: var(--ink);
+  border: 1.5px solid var(--border2); font-family: 'DM Sans', sans-serif;
+  font-weight: 700; font-size: 0.88rem; cursor: pointer; transition: all 0.2s;
+  text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-apply:hover { border-color: var(--ink); }
+
+.form-footer { text-align: center; margin-top: 20px; font-size: 0.8rem; color: var(--soft); }
+.form-footer a { color: var(--coral); font-weight: 600; text-decoration: none; }
+
+@media (max-width: 900px) {
+  body { overflow: auto; height: auto; }
+  .page-wrap { grid-template-columns: 1fr; height: auto; }
+  .left-panel { display: none; }
+  .right-panel { padding: 100px 24px 60px; }
+}
+</style>
+</head>
+<body class="no-nav">
+
+<a href="home.html" class="back-link">Home</a>
+
+<div class="page-wrap">
+
+  <!-- LEFT -->
+  <div class="left-panel">
+    <a class="lp-logo" href="home.html">
+      <div class="lp-logo-mark"><svg viewBox="0 0 14 14"><polygon points="7,1 13,7 7,13 1,7"/></svg></div>
+      <span class="lp-logo-text">Forma</span>
+    </a>
+    <div class="lp-inner">
+      <span class="lp-eyebrow">Welcome Back</span>
+      <div class="lp-title">Log in to your <em>Forma</em> account.</div>
+      <p class="lp-sub">Access your course dashboard, session recordings, critique notes, and community resources.</p>
+      <div class="role-cards">
+        <div class="role-card selected" onclick="setRole('student', this)">
+          <div class="role-card-icon"><svg viewBox="0 0 20 20"><path d="M10 10a4 4 0 100-8 4 4 0 000 8zm0 2c-4.42 0-8 1.79-8 4v1h16v-1c0-2.21-3.58-4-8-4z"/></svg></div>
+          <div class="role-card-text"><strong>Student</strong><span>Course access, assignments & community</span></div>
+          <div class="role-check"></div>
+        </div>
+        <div class="role-card" onclick="setRole('staff', this)">
+          <div class="role-card-icon"><svg viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg></div>
+          <div class="role-card-text"><strong>Staff / Instructor</strong><span>Cohort management, grading, scheduling</span></div>
+          <div class="role-check"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right-panel">
+    <div>
+      <span class="form-eyebrow" id="formEyebrow">Student Portal</span>
+      <h1 class="form-title" id="loginTitle">Student Login</h1>
+      <p class="form-sub" id="loginSub">
+        Access your courses and community. New here? <a href="register.html">Apply for 2025 →</a>
+      </p>
+
+      <div class="role-toggle">
+        <button class="role-btn active" onclick="switchRole('student', this)">Student</button>
+        <button class="role-btn" onclick="switchRole('staff', this)">Staff</button>
+      </div>
+
+      <div class="info-box" id="infoBox">
+        <div>This portal is for <strong>enrolled Forma students</strong>. If you haven't applied yet, <a href="register.html" style="color:var(--coral);font-weight:600;text-decoration:none">apply here →</a></div>
+      </div>
+
+      <form onsubmit="handleLogin(event)" novalidate>
+        <div class="fg">
+          <label>Email Address <span class="req">*</span></label>
+          <input type="email" placeholder="you@example.com" required id="emailInput">
+        </div>
+        <div class="fg">
+          <label>Password <span class="req">*</span></label>
+          <div class="pw-wrap">
+            <input type="password" placeholder="Enter your password" required id="pwInput">
+            <button type="button" class="pw-toggle" onclick="togglePw()" id="pwBtn">Show</button>
+          </div>
+        </div>
+        <a href="#" class="forgot">Forgot your password?</a>
+        <button type="submit" class="btn-signin">Sign In →</button>
+      </form>
+
+      <div class="divider">or</div>
+      <a href="register.html" class="btn-apply">Apply for 2025 →</a>
+
+      <p class="form-footer">
+        Don't have an account? <a href="register.html">Submit an application →</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<script src="shared.js"></script>
+<script>
+const roles = {
+  student: {
+    title:   'Student Login',
+    eyebrow: 'Student Portal',
+    sub:     'Access your courses and community. New here? <a href="register.html">Apply for 2025 →</a>',
+    info:    'This portal is for <strong>enrolled Forma students</strong>. If you haven\'t applied yet, <a href="register.html" style="color:var(--coral);font-weight:600;text-decoration:none">apply here →</a>'
+  },
+  staff: {
+    title:   'Staff Login',
+    eyebrow: 'Staff Portal',
+    sub:     'Access the instructor dashboard, cohort management, and scheduling tools.',
+    info:    '<strong>Staff access only.</strong> Unauthorised login attempts are logged.'
+  }
+};
+
+function switchRole(role, btn) {
+  document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const r = roles[role];
+  document.getElementById('loginTitle').textContent = r.title;
+  document.getElementById('formEyebrow').textContent = r.eyebrow;
+  document.getElementById('loginSub').innerHTML = r.sub;
+  document.getElementById('infoBox').innerHTML = '<div>' + r.info + '</div>';
+}
+
+function setRole(role, card) {
+  document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+  const btns = document.querySelectorAll('.role-btn');
+  const idx = { student: 0, staff: 1 };
+  btns.forEach(b => b.classList.remove('active'));
+  btns[idx[role]].classList.add('active');
+  switchRole(role, btns[idx[role]]);
+}
+
+let pwVisible = false;
+function togglePw() {
+  pwVisible = !pwVisible;
+  document.getElementById('pwInput').type = pwVisible ? 'text' : 'password';
+  document.getElementById('pwBtn').textContent = pwVisible ? 'Hide' : 'Show';
+}
+
+function handleLogin(e) {
+  e.preventDefault();
+  showToast('Signing you in…');
+}
+</script>
+</body>
+</html>

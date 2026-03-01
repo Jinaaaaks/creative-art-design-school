@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Courses — Forma Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+
+/* ── PAGE HERO ── */
+.page-hero {
+  padding: calc(var(--nav-h) + 80px) 40px 80px;
+  background: white;
+  border-bottom: 1px solid var(--border);
+}
+.page-hero-inner { max-width: var(--max); margin: 0 auto; }
+.page-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-weight: 900; color: var(--ink);
+  line-height: 1.05; letter-spacing: -2px;
+  margin-bottom: 20px; max-width: 700px;
+}
+.page-hero h1 em { font-style: italic; color: var(--coral); }
+.page-hero p {
+  font-size: 1.05rem; color: var(--mid);
+  line-height: 1.75; max-width: 520px; margin-bottom: 36px;
+}
+
+/* Filter tabs */
+.filter-row { display: flex; gap: 0; border: 1.5px solid var(--border); display: inline-flex; }
+.ftab {
+  padding: 10px 22px; background: transparent;
+  border: none; border-right: 1px solid var(--border);
+  font-family: 'DM Sans', sans-serif; font-weight: 600;
+  font-size: 0.84rem; cursor: pointer; transition: all 0.18s;
+  color: var(--mid); letter-spacing: 0.01em;
+}
+.ftab:last-child { border-right: none; }
+.ftab:hover { background: var(--stone); color: var(--ink); }
+.ftab.active { background: var(--ink); color: white; }
+
+/* ── PROGRAMS GRID ── */
+.programs-section {
+  padding: 80px 40px 120px;
+  background: var(--bg);
+}
+.programs-inner { max-width: var(--max); margin: 0 auto; }
+.prog-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 0;
+}
+.prog-card {
+  background: white;
+  display: flex; flex-direction: column;
+  transition: all 0.25s;
+}
+.prog-card:hover { background: var(--stone); }
+.prog-card[style*="none"] { display: none !important; }
+
+.prog-card-accent { height: 3px; width: 100%; }
+.prog-card-body { padding: 36px 32px; flex: 1; display: flex; flex-direction: column; }
+.prog-card-level {
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--coral); margin-bottom: 14px;
+}
+.prog-card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 700; color: var(--ink);
+  margin-bottom: 12px; line-height: 1.25;
+}
+.prog-card-desc { font-size: 0.84rem; color: var(--mid); line-height: 1.7; flex: 1; margin-bottom: 24px; }
+.prog-card-meta { display: flex; gap: 0; border-top: 1px solid var(--border); }
+.prog-meta-item {
+  flex: 1; padding: 14px 0; text-align: center;
+  border-right: 1px solid var(--border);
+  font-size: 0.75rem;
+}
+.prog-meta-item:last-child { border-right: none; }
+.prog-meta-item strong { display: block; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.prog-meta-item span { color: var(--soft); font-weight: 400; }
+.prog-card-footer { padding: 20px 32px; border-top: 1px solid var(--border); }
+.prog-card-footer .skills-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft); margin-bottom: 10px; }
+.prog-skill-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+.prog-skill-tag {
+  padding: 4px 10px; background: var(--stone);
+  border: 1px solid var(--border);
+  font-size: 0.72rem; font-weight: 600; color: var(--mid);
+}
+.prog-cta {
+  display: block; width: 100%; padding: 13px;
+  background: var(--ink); color: white; text-align: center;
+  font-family: 'DM Sans', sans-serif; font-weight: 600;
+  font-size: 0.86rem; text-decoration: none; border: none; cursor: pointer;
+  transition: background 0.2s; letter-spacing: 0.01em;
+}
+.prog-cta:hover { background: var(--coral); }
+
+/* ── CTA BANNER ── */
+.cta-banner {
+  max-width: var(--max); margin: 0 auto;
+  background: var(--ink); padding: 64px;
+  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+}
+.cta-banner-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 700; color: white;
+  margin-bottom: 8px; letter-spacing: -0.5px;
+}
+.cta-banner-text h2 em { font-style: italic; color: rgba(255,255,255,0.5); }
+.cta-banner-text p { font-size: 0.9rem; color: rgba(255,255,255,0.5); font-weight: 400; }
+.cta-banner-btns { display: flex; gap: 12px; flex-shrink: 0; }
+.btn-cta-p {
+  padding: 13px 26px; background: white; color: var(--ink);
+  font-family: 'DM Sans', sans-serif; font-weight: 600;
+  font-size: 0.9rem; text-decoration: none; transition: all 0.2s; white-space: nowrap;
+}
+.btn-cta-p:hover { background: var(--coral); color: white; }
+.btn-cta-g {
+  padding: 13px 26px; background: transparent; color: rgba(255,255,255,0.7);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  font-family: 'DM Sans', sans-serif; font-weight: 600;
+  font-size: 0.9rem; text-decoration: none; transition: all 0.2s; white-space: nowrap;
+}
+.btn-cta-g:hover { border-color: rgba(255,255,255,0.5); color: white; }
+
+@media (max-width: 960px) {
+  .prog-grid { grid-template-columns: 1fr 1fr; }
+  .page-hero { padding-left: 20px; padding-right: 20px; }
+  .programs-section { padding-left: 20px; padding-right: 20px; }
+}
+@media (max-width: 640px) {
+  .prog-grid { grid-template-columns: 1fr; }
+  .cta-banner { flex-direction: column; padding: 40px 24px; }
+  .cta-banner-btns { justify-content: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="home.html">
+      <div class="nav-logo-mark"><svg viewBox="0 0 14 14"><polygon points="7,1 13,7 7,13 1,7"/></svg></div>
+      <span class="nav-logo-text">Forma</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="program.html" class="active">Courses</a></li>
+      <li><a href="help.html">Help</a></li>
+    </ul>
+    <div class="nav-auth">
+      <a class="nav-login" href="login.html">Log in</a>
+      <a class="nav-reg" href="register.html">Apply Now</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="eyebrow">Our Curriculum</span>
+    <h1>Learn to see. Learn to <em>make.</em></h1>
+    <p>Every course at Forma is taught by practitioners — working designers, art directors, and typographers with active studios. No adjuncts, no PowerPoint theory.</p>
+    <div class="filter-row">
+      <button class="ftab active" onclick="filterPrograms('all', this)">All Courses</button>
+      <button class="ftab" onclick="filterPrograms('foundation', this)">Foundation</button>
+      <button class="ftab" onclick="filterPrograms('intermediate', this)">Intermediate</button>
+      <button class="ftab" onclick="filterPrograms('advanced', this)">Advanced</button>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS GRID -->
+<section class="programs-section">
+  <div class="programs-inner">
+    <div class="prog-grid" id="progGrid">
+
+      <div class="prog-card fade-up" data-level="foundation">
+        <div class="prog-card-accent" style="background:var(--ink)"></div>
+        <div class="prog-card-body">
+          <div class="prog-card-level">Foundation</div>
+          <div class="prog-card-name">Visual Design Intensive</div>
+          <p class="prog-card-desc">The cornerstone programme. Composition, colour theory, grid systems, and typographic fundamentals — taught through daily exercises and weekly critiques.</p>
+          <div class="prog-card-meta">
+            <div class="prog-meta-item"><strong>10 wks</strong><span>Duration</span></div>
+            <div class="prog-meta-item"><strong>All Levels</strong><span>Entry</span></div>
+            <div class="prog-meta-item"><strong>On-site</strong><span>Format</span></div>
+          </div>
+        </div>
+        <div class="prog-card-footer">
+          <div class="skills-label">You will develop</div>
+          <div class="prog-skill-tags">
+            <span class="prog-skill-tag">Composition</span>
+            <span class="prog-skill-tag">Colour</span>
+            <span class="prog-skill-tag">Grid Systems</span>
+            <span class="prog-skill-tag">Typography</span>
+          </div>
+          <a href="register.html" class="prog-cta">Apply for This Course →</a>
+        </div>
+      </div>
+
+      <div class="prog-card fade-up" data-delay="80" data-level="foundation">
+        <div class="prog-card-accent" style="background:#5c5c5c"></div>
+        <div class="prog-card-body">
+          <div class="prog-card-level">Foundation</div>
+          <div class="prog-card-name">Drawing for Designers</div>
+          <p class="prog-card-desc">Observation, abstraction, and visual thinking through drawing. For designers who want to sketch ideas — not trace them.</p>
+          <div class="prog-card-meta">
+            <div class="prog-meta-item"><strong>5 wks</strong><span>Duration</span></div>
+            <div class="prog-meta-item"><strong>All Levels</strong><span>Entry</span></div>
+            <div class="prog-meta-item"><strong>On-site</strong><span>Format</span></div>
+          </div>
+        </div>
+        <div class="prog-card-footer">
+          <div class="skills-label">You will develop</div>
+          <div class="prog-skill-tags">
+            <span class="prog-skill-tag">Sketching</span>
+            <span class="prog-skill-tag">Abstraction</span>
+            <span class="prog-skill-tag">Visual Thinking</span>
+          </div>
+          <a href="register.html" class="prog-cta">Apply for This Course →</a>
+        </div>
+      </div>
+
+      <div class="prog-card fade-up" data-delay="160" data-level="intermediate">
+        <div class="prog-card-accent" style="background:var(--coral)"></div>
+        <div class="prog-card-body">
+          <div class="prog-card-level">Intermediate</div>
+          <div class="prog-card-name">Brand Identity Workshop</div>
+          <p class="prog-card-desc">Six weeks, one client, one brief. Strategy, naming, logomark, colour, and system — presented and defended at a final critique.</p>
+          <div class="prog-card-meta">
+            <div class="prog-meta-item"><strong>6 wks</strong><span>Duration</span></div>
+            <div class="prog-meta-item"><strong>Intermediate</strong><span>Entry</span></div>
+            <div class="prog-meta-item"><strong>Hybrid</strong><span>Format</span></div>
+          </div>
+        </div>
+        <div class="prog-card-footer">
+          <div class="skills-label">You will develop</div>
+          <div class="prog-skill-tags">
+            <span class="prog-skill-tag">Brand Strategy</span>
+            <span class="prog-skill-tag">Logomark</span>
+            <span class="prog-skill-tag">Systems</span>
+            <span class="prog-skill-tag">Presentation</span>
+          </div>
+          <a href="register.html" class="prog-cta">Apply for This Course →</a>
+        </div>
+      </div>
+
+      <div class="prog-card fade-up" data-level="intermediate">
+        <div class="prog-card-accent" style="background:#8a7a6a"></div>
+        <div class="prog-card-body">
+          <div class="prog-card-level">Intermediate</div>
+          <div class="prog-card-name">Typography Studio</div>
+          <p class="prog-card-desc">Type as material. From micro-typesetting to macro layout — historical and contemporary approaches, with hands-on projects every week.</p>
+          <div class="prog-card-meta">
+            <div class="prog-meta-item"><strong>6 wks</strong><span>Duration</span></div>
+            <div class="prog-meta-item"><strong>Intermediate</strong><span>Entry</span></div>
+            <div class="prog-meta-item"><strong>On-site</strong><span>Format</span></div>
+          </div>
+        </div>
+        <div class="prog-card-footer">
+          <div class="skills-label">You will develop</div>
+          <div class="prog-skill-tags">
+            <span class="prog-skill-tag">Typesetting</span>
+            <span class="prog-skill-tag">Hierarchy</span>
+            <span class="prog-skill-tag">Layout</span>
+          </div>
+          <a href="register.html" class="prog-cta">Apply for This Course →</a>
+        </div>
+      </div>
+
+      <div class="prog-card fade-up" data-delay="80" data-level="intermediate">
+        <div class="prog-card-accent" style="background:#3a4a60"></div>
+        <div class="prog-card-body">
+          <div class="prog-card-level">Intermediate</div>
+          <div class="prog-card-name">Motion & UI Animation</div>
+          <p class="prog-card-desc">Timing, easing, and intention. Principles of animation applied to interface and presentation design, from After Effects to Figma prototypes.</p>
+          <div class="prog-card-meta">
+            <div class="prog-meta-item"><strong>5 wks</strong><span>Duration</span></div>
+            <div class="prog-meta-item"><strong>Intermediate</strong><span>Entry</span></div>
+            <div class="prog-meta-item"><strong>Online</strong><span>Format</span></div>
+          </div>
+        </div>
+        <div class="prog-card-footer">
+          <div class="skills-label">You will develop</div>
+          <div class="prog-skill-tags">
+            <span class="prog-skill-tag">Animation</span>
+            <span class="prog-skill-tag">After Effects</span>
+            <span class="prog-skill-tag">Prototyping</span>
+          </div>
+          <a href="register.html" class="prog-cta">Apply for This Course →</a>
+        </div>
+      </div>
+
+      <div class="prog-card fade-up" data-delay="160" data-level="advanced">
+        <div class="prog-card-accent" style="background:#2d2028"></div>
+        <div class="prog-card-body">
+          <div class="prog-card-level">Advanced</div>
+          <div class="prog-card-name">Editorial & Print Design</div>
+          <p class="prog-card-desc">Long-form publication design, print production, and the enduring discipline of editorial layout — from book spreads to magazine covers.</p>
+          <div class="prog-card-meta">
+            <div class="prog-meta-item"><strong>8 wks</strong><span>Duration</span></div>
+            <div class="prog-meta-item"><strong>Advanced</strong><span>Entry</span></div>
+            <div class="prog-meta-item"><strong>On-site</strong><span>Format</span></div>
+          </div>
+        </div>
+        <div class="prog-card-footer">
+          <div class="skills-label">You will develop</div>
+          <div class="prog-skill-tags">
+            <span class="prog-skill-tag">InDesign</span>
+            <span class="prog-skill-tag">Print Production</span>
+            <span class="prog-skill-tag">Editorial</span>
+          </div>
+          <a href="register.html" class="prog-cta">Apply for This Course →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner fade-up">
+  <div class="cta-banner-text">
+    <h2>Unsure where to start? <em>Let's talk.</em></h2>
+    <p>Our admissions team can help you choose the right course for your current level and goals.</p>
+  </div>
+  <div class="cta-banner-btns">
+    <a href="register.html" class="btn-cta-p">Apply Now →</a>
+    <a href="help.html" class="btn-cta-g">Ask a Question</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="footer-logo" href="home.html">
+        <div class="footer-logo-mark"><svg viewBox="0 0 14 14"><polygon points="7,1 13,7 7,13 1,7"/></svg></div>
+        <span class="footer-logo-text">Forma</span>
+      </a>
+      <p class="footer-tagline">A creative arts and design school for students who are serious about the craft of visual communication.</p>
+      <div class="footer-socials">
+        <a class="social-btn" href="#" aria-label="Instagram">Ig</a>
+        <a class="social-btn" href="#" aria-label="LinkedIn">Li</a>
+        <a class="social-btn" href="#" aria-label="Twitter">Tw</a>
+        <a class="social-btn" href="#" aria-label="Behance">Be</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>School</h4><ul><li><a href="home.html">Home</a></li><li><a href="program.html">Courses</a></li><li><a href="help.html">Help & FAQ</a></li><li><a href="register.html">Apply Now</a></li></ul></div>
+    <div class="footer-col"><h4>Community</h4><ul><li><a href="#">Alumni</a></li><li><a href="#">Faculty</a></li><li><a href="#">Exhibitions</a></li><li><a href="#">Open Days</a></li></ul></div>
+    <div class="footer-col"><h4>Info</h4><ul><li><a href="help.html">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li><li><a href="login.html">Staff Login</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Forma Studio. All rights reserved.</span>
+    <span>Design is a discipline, not a decoration.</span>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+function filterPrograms(level, btn) {
+  document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.prog-card').forEach(card => {
+    const show = level === 'all' || card.dataset.level === level;
+    card.style.display = show ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>

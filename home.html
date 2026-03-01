@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forma Studio — Creative Arts & Design School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  padding: calc(var(--nav-h) + 80px) 40px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--coral);
+  margin-bottom: 24px;
+}
+.hero-eyebrow::before {
+  content: ''; display: block;
+  width: 24px; height: 1.5px;
+  background: var(--coral);
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 5.5vw, 5rem);
+  font-weight: 900; line-height: 1.05;
+  color: var(--ink); letter-spacing: -2px;
+  margin-bottom: 24px;
+}
+.hero h1 em { font-style: italic; color: var(--coral); }
+.hero-sub {
+  font-size: 1.05rem; color: var(--mid);
+  line-height: 1.8; max-width: 420px;
+  margin-bottom: 40px; font-weight: 400;
+}
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--ink); color: white;
+  padding: 14px 30px;
+  font-family: 'DM Sans', sans-serif; font-weight: 600;
+  font-size: 0.92rem; text-decoration: none; border: none;
+  cursor: pointer; transition: background 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+  letter-spacing: 0.01em;
+}
+.btn-primary:hover { background: var(--coral); }
+.btn-secondary {
+  background: transparent; color: var(--ink);
+  padding: 14px 30px; border: 1.5px solid var(--border2);
+  font-family: 'DM Sans', sans-serif; font-weight: 600;
+  font-size: 0.92rem; text-decoration: none;
+  cursor: pointer; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-secondary:hover { border-color: var(--ink); }
+
+/* Hero Visual */
+.hero-visual { position: relative; }
+.hero-canvas {
+  aspect-ratio: 4/3;
+  background: var(--stone);
+  border: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+  padding: 20px;
+  position: relative;
+}
+.hc-block {
+  background: white;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.4s ease;
+}
+.hc-block:hover { transform: scale(0.96); }
+.hc-block:nth-child(1) { background: var(--ink); }
+.hc-block:nth-child(2) { background: var(--stone2); }
+.hc-block:nth-child(3) { background: white; }
+.hc-block:nth-child(4) { background: var(--coral); }
+
+.hc-label {
+  position: absolute; bottom: -1px; left: 0; right: 0;
+  background: white; border-top: 1px solid var(--border);
+  padding: 14px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.hc-label span { font-size: 0.78rem; font-weight: 600; color: var(--soft); letter-spacing: 0.06em; text-transform: uppercase; }
+.hc-dot { width: 8px; height: 8px; background: var(--coral); border-radius: 50%; animation: blink 2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero-badge {
+  position: absolute; top: -16px; right: -16px;
+  background: white; border: 1px solid var(--border);
+  padding: 16px 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  text-align: center; min-width: 110px;
+}
+.hero-badge-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 700; color: var(--ink);
+  line-height: 1; display: block;
+}
+.hero-badge-lbl { font-size: 0.7rem; font-weight: 600; color: var(--soft); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; display: block; }
+
+/* ── LOGOS STRIP ── */
+.logos-strip {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 40px;
+  background: white;
+}
+.logos-inner {
+  max-width: var(--max); margin: 0 auto;
+  display: flex; align-items: center;
+  gap: 0;
+}
+.logos-label {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--soft);
+  white-space: nowrap; margin-right: 40px; flex-shrink: 0;
+}
+.logos-list {
+  display: flex; align-items: center; gap: 48px; flex-wrap: wrap;
+}
+.logo-item {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; font-weight: 700;
+  color: var(--border2); letter-spacing: -0.3px;
+  transition: color 0.2s;
+}
+.logo-item:hover { color: var(--soft); }
+
+/* ── STATS ── */
+#stats {
+  padding: 100px 40px;
+  background: var(--ink);
+}
+.stats-inner {
+  max-width: var(--max); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.stats-text .eyebrow { color: var(--coral); }
+.stats-text .section-h { color: white; margin-bottom: 16px; }
+.stats-text .section-p { color: rgba(255,255,255,0.5); margin-bottom: 32px; }
+.stats-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.s-cell {
+  padding: 40px 32px;
+  background: var(--ink);
+  transition: background 0.2s;
+}
+.s-cell:hover { background: var(--ink2); }
+.s-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem; font-weight: 700; color: white;
+  line-height: 1; margin-bottom: 8px; display: block;
+}
+.s-lbl { font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.4); }
+
+/* ── WHAT WE TEACH ── */
+#what {
+  padding: 120px 40px;
+  background: var(--bg);
+}
+.what-inner { max-width: var(--max); margin: 0 auto; }
+.what-header { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 64px; }
+.what-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.w-card {
+  background: white; padding: 36px 28px;
+  transition: all 0.25s; cursor: default;
+}
+.w-card:hover { background: var(--stone); }
+.w-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.72rem; font-weight: 700; color: var(--coral);
+  letter-spacing: 0.12em; margin-bottom: 24px; display: block;
+}
+.w-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; font-weight: 700; color: var(--ink);
+  margin-bottom: 12px; line-height: 1.3;
+}
+.w-text { font-size: 0.84rem; color: var(--mid); line-height: 1.7; }
+
+/* ── COURSES ── */
+#courses {
+  padding: 120px 40px;
+  background: var(--stone);
+}
+.courses-inner { max-width: var(--max); margin: 0 auto; }
+.courses-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; }
+.courses-scroll { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; }
+.courses-scroll::-webkit-scrollbar { height: 3px; }
+.courses-scroll::-webkit-scrollbar-track { background: var(--border); }
+.courses-scroll::-webkit-scrollbar-thumb { background: var(--soft); }
+.c-card {
+  min-width: 300px; background: white; flex-shrink: 0;
+  border: 1px solid var(--border);
+  scroll-snap-align: start; transition: all 0.25s;
+  display: flex; flex-direction: column;
+}
+.c-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.08); transform: translateY(-4px); }
+.c-card-img {
+  aspect-ratio: 16/9; background: var(--stone2);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.c-card-tag {
+  position: absolute; top: 14px; left: 14px;
+  background: white; padding: 4px 10px;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink);
+}
+.c-card-color { width: 100%; height: 100%; }
+.c-card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+.c-card-level { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); margin-bottom: 8px; }
+.c-card-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 10px; line-height: 1.3; }
+.c-card-desc { font-size: 0.82rem; color: var(--mid); line-height: 1.65; flex: 1; margin-bottom: 20px; }
+.c-card-meta { display: flex; gap: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.c-meta-item { font-size: 0.76rem; color: var(--soft); font-weight: 500; }
+.c-meta-item strong { color: var(--ink); font-weight: 600; display: block; margin-bottom: 2px; }
+.c-card-btn {
+  display: block; margin-top: 18px;
+  background: var(--ink); color: white;
+  padding: 12px 20px; text-align: center;
+  font-weight: 600; font-size: 0.84rem;
+  text-decoration: none; transition: background 0.2s;
+}
+.c-card-btn:hover { background: var(--coral); }
+
+/* ── CTA ── */
+#cta {
+  padding: 120px 40px;
+  background: white;
+  border-top: 1px solid var(--border);
+}
+.cta-inner {
+  max-width: 700px; margin: 0 auto; text-align: center;
+}
+.cta-inner .section-h { margin-bottom: 16px; }
+.cta-inner .section-p { margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* Responsive */
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; gap: 48px; padding-top: calc(var(--nav-h) + 48px); }
+  .hero-visual { display: none; }
+  .stats-inner { grid-template-columns: 1fr; gap: 48px; }
+  .what-grid { grid-template-columns: 1fr 1fr; }
+  .what-header { grid-template-columns: 1fr; gap: 16px; }
+  .courses-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+@media (max-width: 600px) {
+  .hero { padding-left: 20px; padding-right: 20px; }
+  .what-grid { grid-template-columns: 1fr; }
+  #stats, #what, #courses, #cta { padding-left: 20px; padding-right: 20px; }
+  .logos-strip { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="home.html">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 14 14"><polygon points="7,1 13,7 7,13 1,7"/></svg>
+      </div>
+      <span class="nav-logo-text">Forma</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="home.html" class="active">Home</a></li>
+      <li><a href="program.html">Courses</a></li>
+      <li><a href="help.html">Help</a></li>
+    </ul>
+    <div class="nav-auth">
+      <a class="nav-login" href="login.html">Log in</a>
+      <a class="nav-reg" href="register.html">Apply Now</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Creative Arts & Design School</div>
+    <h1>Where ideas become <em>craft.</em></h1>
+    <p class="hero-sub">Forma is a modern design school offering focused courses in graphic design, typography, motion, and visual storytelling — for students serious about their creative practice.</p>
+    <div class="hero-btns">
+      <a href="register.html" class="btn-primary">Apply for 2025 →</a>
+      <a href="program.html" class="btn-secondary">Browse Courses</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-badge">
+      <span class="hero-badge-num" data-count="94" data-suffix="%">0%</span>
+      <span class="hero-badge-lbl">Placement Rate</span>
+    </div>
+    <div class="hero-canvas">
+      <div class="hc-block"></div>
+      <div class="hc-block"></div>
+      <div class="hc-block"></div>
+      <div class="hc-block"></div>
+      <div class="hc-label">
+        <span>Studio Session — Live</span>
+        <span class="hc-dot"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS STRIP -->
+<div class="logos-strip">
+  <div class="logos-inner">
+    <span class="logos-label">Alumni at</span>
+    <div class="logos-list">
+      <span class="logo-item">Pentagram</span>
+      <span class="logo-item">IDEO</span>
+      <span class="logo-item">Wolff Olins</span>
+      <span class="logo-item">Collins</span>
+      <span class="logo-item">Landor</span>
+      <span class="logo-item">Base Design</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-inner">
+    <div class="stats-text fade-up">
+      <span class="eyebrow">By the Numbers</span>
+      <h2 class="section-h">A school built around outcomes.</h2>
+      <p class="section-p">We keep cohorts small, faculty exceptional, and our curriculum current. Every number below reflects a deliberate decision.</p>
+      <a href="program.html" class="btn-primary">View All Courses →</a>
+    </div>
+    <div class="stats-grid fade-up" data-delay="100">
+      <div class="s-cell">
+        <span class="s-num" data-count="12" data-suffix="">0</span>
+        <span class="s-lbl">Max students per cohort</span>
+      </div>
+      <div class="s-cell">
+        <span class="s-num" data-count="8" data-suffix="">0</span>
+        <span class="s-lbl">Disciplines offered</span>
+      </div>
+      <div class="s-cell">
+        <span class="s-num" data-count="94" data-suffix="%">0%</span>
+        <span class="s-lbl">Graduate placement rate</span>
+      </div>
+      <div class="s-cell">
+        <span class="s-num" data-count="7" data-suffix="">0</span>
+        <span class="s-lbl">Years running</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE TEACH -->
+<section id="what">
+  <div class="what-inner">
+    <div class="what-header">
+      <div>
+        <span class="eyebrow">Curriculum</span>
+        <h2 class="section-h">Built on fundamentals. Expanded into practice.</h2>
+      </div>
+      <p class="section-p">Our courses balance historical principles with contemporary tools — every student learns to think visually, not just execute.</p>
+    </div>
+    <div class="what-grid">
+      <div class="w-card fade-up" data-delay="0">
+        <span class="w-num">01</span>
+        <div class="w-title">Visual Foundations</div>
+        <p class="w-text">Composition, colour theory, and form — the non-negotiable language of design.</p>
+      </div>
+      <div class="w-card fade-up" data-delay="80">
+        <span class="w-num">02</span>
+        <div class="w-title">Typography</div>
+        <p class="w-text">Type as image, type as structure. Hands-on with type history and contemporary practice.</p>
+      </div>
+      <div class="w-card fade-up" data-delay="160">
+        <span class="w-num">03</span>
+        <div class="w-title">Brand Identity</div>
+        <p class="w-text">Strategy-to-mark pipeline, systems thinking, and presentation of complex identities.</p>
+      </div>
+      <div class="w-card fade-up" data-delay="240">
+        <span class="w-num">04</span>
+        <div class="w-title">Motion & Interaction</div>
+        <p class="w-text">Designing in time — principles of animation, interface motion, and prototyping.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="courses-inner">
+    <div class="courses-header">
+      <div>
+        <span class="eyebrow">Featured Courses</span>
+        <h2 class="section-h">Start with one. Keep going.</h2>
+      </div>
+      <a href="program.html" class="btn-secondary">All Courses →</a>
+    </div>
+    <div class="courses-scroll">
+
+      <div class="c-card">
+        <div class="c-card-img">
+          <div class="c-card-color" style="background:linear-gradient(135deg,#1a1a1a 0%,#333 100%)"></div>
+          <span class="c-card-tag">Flagship</span>
+        </div>
+        <div class="c-card-body">
+          <div class="c-card-level">Foundation</div>
+          <div class="c-card-name">Visual Design Intensive</div>
+          <p class="c-card-desc">Ten weeks covering composition, colour, grid systems, and typography. The core programme every Forma student begins with.</p>
+          <div class="c-card-meta">
+            <div class="c-meta-item"><strong>10 weeks</strong>Duration</div>
+            <div class="c-meta-item"><strong>All levels</strong>Entry</div>
+            <div class="c-meta-item"><strong>On-site</strong>Format</div>
+          </div>
+          <a href="register.html" class="c-card-btn">Apply →</a>
+        </div>
+      </div>
+
+      <div class="c-card">
+        <div class="c-card-img">
+          <div class="c-card-color" style="background:linear-gradient(135deg,var(--coral) 0%,#a33000 100%)"></div>
+          <span class="c-card-tag">Popular</span>
+        </div>
+        <div class="c-card-body">
+          <div class="c-card-level">Intermediate</div>
+          <div class="c-card-name">Brand Identity Workshop</div>
+          <p class="c-card-desc">From brief to final mark — a compressed, project-based deep dive into brand strategy, naming, and identity systems.</p>
+          <div class="c-card-meta">
+            <div class="c-meta-item"><strong>6 weeks</strong>Duration</div>
+            <div class="c-meta-item"><strong>Intermediate</strong>Entry</div>
+            <div class="c-meta-item"><strong>Hybrid</strong>Format</div>
+          </div>
+          <a href="register.html" class="c-card-btn">Apply →</a>
+        </div>
+      </div>
+
+      <div class="c-card">
+        <div class="c-card-img">
+          <div class="c-card-color" style="background:linear-gradient(135deg,#3d3530 0%,#6b5a50 100%)"></div>
+        </div>
+        <div class="c-card-body">
+          <div class="c-card-level">Advanced</div>
+          <div class="c-card-name">Editorial & Print Design</div>
+          <p class="c-card-desc">Long-form publication design, print production, and the enduring craft of editorial layout from books to magazines.</p>
+          <div class="c-card-meta">
+            <div class="c-meta-item"><strong>8 weeks</strong>Duration</div>
+            <div class="c-meta-item"><strong>Advanced</strong>Entry</div>
+            <div class="c-meta-item"><strong>On-site</strong>Format</div>
+          </div>
+          <a href="register.html" class="c-card-btn">Apply →</a>
+        </div>
+      </div>
+
+      <div class="c-card">
+        <div class="c-card-img">
+          <div class="c-card-color" style="background:linear-gradient(135deg,#232b38 0%,#3a4a60 100%)"></div>
+        </div>
+        <div class="c-card-body">
+          <div class="c-card-level">Intermediate</div>
+          <div class="c-card-name">Motion & UI Animation</div>
+          <p class="c-card-desc">Principles of animation applied to interface design — timing, easing, and the invisible glue of great digital products.</p>
+          <div class="c-card-meta">
+            <div class="c-meta-item"><strong>5 weeks</strong>Duration</div>
+            <div class="c-meta-item"><strong>Intermediate</strong>Entry</div>
+            <div class="c-meta-item"><strong>Online</strong>Format</div>
+          </div>
+          <a href="register.html" class="c-card-btn">Apply →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner fade-up">
+    <span class="eyebrow">Applications Open</span>
+    <h2 class="section-h">Ready to commit to your craft?</h2>
+    <p class="section-p">Cohorts are kept to twelve students maximum. Applications for the 2025 intake are open now — spaces fill quickly.</p>
+    <div class="cta-btns">
+      <a href="register.html" class="btn-primary">Apply for 2025 →</a>
+      <a href="help.html" class="btn-secondary">Have a Question?</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="footer-logo" href="home.html">
+        <div class="footer-logo-mark">
+          <svg viewBox="0 0 14 14"><polygon points="7,1 13,7 7,13 1,7"/></svg>
+        </div>
+        <span class="footer-logo-text">Forma</span>
+      </a>
+      <p class="footer-tagline">A creative arts and design school for students who are serious about the craft of visual communication.</p>
+      <div class="footer-socials">
+        <a class="social-btn" href="#" aria-label="Instagram">Ig</a>
+        <a class="social-btn" href="#" aria-label="LinkedIn">Li</a>
+        <a class="social-btn" href="#" aria-label="Twitter">Tw</a>
+        <a class="social-btn" href="#" aria-label="Behance">Be</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>School</h4>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="program.html">Courses</a></li>
+        <li><a href="help.html">Help & FAQ</a></li>
+        <li><a href="register.html">Apply Now</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Community</h4>
+      <ul>
+        <li><a href="#">Alumni</a></li>
+        <li><a href="#">Faculty</a></li>
+        <li><a href="#">Exhibitions</a></li>
+        <li><a href="#">Open Days</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <ul>
+        <li><a href="help.html">Contact</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+        <li><a href="login.html">Staff Login</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Forma Studio. All rights reserved.</span>
+    <span>Design is a discipline, not a decoration.</span>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply — Forma Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+body { overflow-x: hidden; }
+
+.page-wrap {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  min-height: 100vh;
+}
+
+/* LEFT PANEL */
+.left-panel {
+  background: var(--ink);
+  padding: 80px 52px 60px;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  position: sticky; top: 0; height: 100vh;
+  overflow-y: auto;
+}
+
+.lp-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; margin-bottom: 64px;
+}
+.lp-logo-mark {
+  width: 28px; height: 28px; background: var(--coral);
+  display: flex; align-items: center; justify-content: center;
+}
+.lp-logo-mark svg { width: 13px; height: 13px; fill: white; }
+.lp-logo-text { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem; color: white; }
+
+.lp-eyebrow {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--coral); margin-bottom: 16px;
+}
+.lp-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  font-weight: 700; color: white;
+  line-height: 1.15; margin-bottom: 18px; letter-spacing: -0.5px;
+}
+.lp-title em { font-style: italic; color: rgba(255,255,255,0.45); }
+.lp-sub {
+  font-size: 0.88rem; color: rgba(255,255,255,0.45);
+  line-height: 1.75; margin-bottom: 48px;
+}
+
+.lp-features { display: flex; flex-direction: column; gap: 0; border: 1px solid rgba(255,255,255,0.08); }
+.lp-feat {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: background 0.2s;
+}
+.lp-feat:last-child { border-bottom: none; }
+.lp-feat:hover { background: rgba(255,255,255,0.04); }
+.lp-feat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.7rem; font-weight: 700; color: var(--coral);
+  letter-spacing: 0.1em; flex-shrink: 0; margin-top: 2px;
+}
+.lp-feat-text strong { display: block; font-weight: 600; color: white; font-size: 0.88rem; margin-bottom: 2px; }
+.lp-feat-text span   { font-size: 0.78rem; color: rgba(255,255,255,0.38); }
+
+/* RIGHT PANEL */
+.right-panel {
+  background: var(--bg);
+  padding: 80px 72px 80px;
+  overflow-y: auto;
+}
+
+/* Progress */
+.progress-wrap { margin-bottom: 40px; }
+.progress-label {
+  display: flex; justify-content: space-between;
+  font-size: 0.74rem; font-weight: 600; color: var(--soft); margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+.progress-bar { height: 2px; background: var(--border); }
+.progress-fill { height: 100%; background: var(--coral); transition: width 0.4s ease; }
+
+.form-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--coral); margin-bottom: 12px; display: block; }
+.form-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.5px; }
+.form-sub { font-size: 0.88rem; color: var(--mid); line-height: 1.65; margin-bottom: 40px; }
+.form-sub a { color: var(--coral); font-weight: 600; text-decoration: none; }
+
+/* Sections */
+.form-section { margin-bottom: 40px; }
+.section-divider {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+}
+.section-divider-label {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--soft); white-space: nowrap;
+}
+.section-divider-line { flex: 1; height: 1px; background: var(--border); }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.fg { margin-bottom: 14px; }
+.fg label { display: block; font-weight: 600; font-size: 0.78rem; margin-bottom: 7px; color: var(--ink); letter-spacing: 0.01em; }
+.req { color: var(--coral); margin-left: 2px; }
+.fg input, .fg select, .fg textarea {
+  width: 100%; padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  background: white; color: var(--ink); font-weight: 400;
+  border-radius: 0;
+}
+.fg input::placeholder, .fg textarea::placeholder { color: rgba(85,85,85,0.35); }
+.fg input:focus, .fg select:focus, .fg textarea:focus {
+  border-color: var(--ink); box-shadow: 0 0 0 3px rgba(26,26,26,0.06);
+}
+.fg select { cursor: pointer; }
+.fg textarea { resize: vertical; min-height: 90px; }
+
+/* Radio / checkbox opts */
+.opt-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.opt-item {
+  display: flex; align-items: center; gap: 8px; cursor: pointer;
+  padding: 9px 16px;
+  border: 1.5px solid var(--border);
+  background: white; transition: all 0.18s; font-weight: 500; font-size: 0.84rem; color: var(--mid);
+}
+.opt-item input { accent-color: var(--ink); }
+.opt-item:has(input:checked) { border-color: var(--ink); color: var(--ink); background: var(--stone); }
+
+/* Course checkboxes */
+.course-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.course-opt {
+  display: flex; align-items: center; gap: 10px; cursor: pointer;
+  padding: 12px 14px; border: 1.5px solid var(--border);
+  background: white; transition: all 0.18s; font-weight: 500; font-size: 0.82rem; color: var(--mid);
+}
+.course-opt input { accent-color: var(--ink); flex-shrink: 0; }
+.course-opt:has(input:checked) { border-color: var(--ink); color: var(--ink); background: var(--stone); }
+
+.btn-submit {
+  width: 100%; padding: 16px; margin-top: 8px;
+  background: var(--ink); color: white;
+  font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.95rem;
+  border: none; cursor: pointer; transition: background 0.2s;
+  letter-spacing: 0.02em;
+}
+.btn-submit:hover { background: var(--coral); }
+
+.form-disclaimer {
+  margin-top: 16px; font-size: 0.74rem; color: var(--soft); line-height: 1.65; text-align: center;
+}
+.form-disclaimer a { color: var(--mid); font-weight: 600; text-decoration: none; }
+
+@media (max-width: 960px) {
+  .page-wrap { grid-template-columns: 1fr; }
+  .left-panel { display: none; }
+  .right-panel { padding: 100px 24px 60px; }
+  .form-row { grid-template-columns: 1fr; }
+  .course-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body class="no-nav">
+
+<a href="home.html" class="back-link">Home</a>
+
+<div class="page-wrap">
+
+  <!-- LEFT -->
+  <div class="left-panel">
+    <a class="lp-logo" href="home.html">
+      <div class="lp-logo-mark"><svg viewBox="0 0 14 14"><polygon points="7,1 13,7 7,13 1,7"/></svg></div>
+      <span class="lp-logo-text">Forma</span>
+    </a>
+    <div class="lp-eyebrow">2025 Applications</div>
+    <div class="lp-title">Apply to <em>Forma Studio</em></div>
+    <p class="lp-sub">Cohorts are capped at 12 students. Tell us about yourself and your creative background — we read every application.</p>
+    <div class="lp-features">
+      <div class="lp-feat">
+        <div class="lp-feat-num">01</div>
+        <div class="lp-feat-text"><strong>Small Cohorts</strong><span>Max 12 students per course — not 120.</span></div>
+      </div>
+      <div class="lp-feat">
+        <div class="lp-feat-num">02</div>
+        <div class="lp-feat-text"><strong>Working Practitioners</strong><span>Every instructor runs an active studio.</span></div>
+      </div>
+      <div class="lp-feat">
+        <div class="lp-feat-num">03</div>
+        <div class="lp-feat-text"><strong>Portfolio Outcomes</strong><span>Every course ends with presentable work.</span></div>
+      </div>
+      <div class="lp-feat">
+        <div class="lp-feat-num">04</div>
+        <div class="lp-feat-text"><strong>Alumni Network</strong><span>Access to our growing global community.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right-panel">
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span>Application Progress</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    </div>
+
+    <span class="form-eyebrow">Student Application</span>
+    <h1 class="form-title">Apply to Forma</h1>
+    <p class="form-sub">Fields marked <span style="color:var(--coral)">*</span> are required. Already a student? <a href="login.html">Log in →</a></p>
+
+    <form id="regForm" onsubmit="handleSubmit(event)" novalidate>
+
+      <!-- PERSONAL -->
+      <div class="form-section">
+        <div class="section-divider">
+          <span class="section-divider-label">Personal Details</span>
+          <div class="section-divider-line"></div>
+        </div>
+        <div class="form-row">
+          <div class="fg"><label>First Name <span class="req">*</span></label><input type="text" placeholder="Priya" required></div>
+          <div class="fg"><label>Last Name <span class="req">*</span></label><input type="text" placeholder="Atkinson" required></div>
+        </div>
+        <div class="form-row">
+          <div class="fg"><label>Email Address <span class="req">*</span></label><input type="email" placeholder="priya@example.com" required></div>
+          <div class="fg"><label>Phone Number</label><input type="tel" placeholder="+44 7700 000000"></div>
+        </div>
+        <div class="fg"><label>City / Location</label><input type="text" placeholder="London, UK"></div>
+      </div>
+
+      <!-- BACKGROUND -->
+      <div class="form-section">
+        <div class="section-divider">
+          <span class="section-divider-label">Creative Background</span>
+          <div class="section-divider-line"></div>
+        </div>
+        <div class="fg">
+          <label>Current profession or studies <span class="req">*</span></label>
+          <input type="text" placeholder="e.g. Graphic Design student / Marketing Manager" required>
+        </div>
+        <div class="fg">
+          <label>Design experience level <span class="req">*</span></label>
+          <select required>
+            <option value="">Select…</option>
+            <option>No experience — complete beginner</option>
+            <option>Some exposure (self-taught, hobbyist)</option>
+            <option>1–2 years practice</option>
+            <option>3+ years professional experience</option>
+          </select>
+        </div>
+        <div class="fg"><label>Portfolio URL (if you have one)</label><input type="url" placeholder="https://yourportfolio.com"></div>
+        <div class="fg">
+          <label>Tell us about your creative background</label>
+          <textarea placeholder="What have you made? What draws you to design? No right answer — just be honest."></textarea>
+        </div>
+      </div>
+
+      <!-- COURSE INTEREST -->
+      <div class="form-section">
+        <div class="section-divider">
+          <span class="section-divider-label">Course Interest</span>
+          <div class="section-divider-line"></div>
+        </div>
+        <div class="fg">
+          <label>Which courses interest you? <small style="color:var(--soft);font-weight:400">(select all that apply)</small></label>
+          <div class="course-grid">
+            <label class="course-opt"><input type="checkbox"> Visual Design Intensive</label>
+            <label class="course-opt"><input type="checkbox"> Drawing for Designers</label>
+            <label class="course-opt"><input type="checkbox"> Brand Identity Workshop</label>
+            <label class="course-opt"><input type="checkbox"> Typography Studio</label>
+            <label class="course-opt"><input type="checkbox"> Motion & UI Animation</label>
+            <label class="course-opt"><input type="checkbox"> Editorial & Print Design</label>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Preferred format</label>
+          <div class="opt-row">
+            <label class="opt-item"><input type="radio" name="format" value="onsite"> On-site</label>
+            <label class="opt-item"><input type="radio" name="format" value="online"> Online</label>
+            <label class="opt-item"><input type="radio" name="format" value="hybrid"> Hybrid</label>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Anything else you'd like us to know?</label>
+          <textarea placeholder="Goals, questions, constraints — anything relevant to your application."></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">Submit Application →</button>
+
+      <p class="form-disclaimer">
+        By applying you agree to our <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.
+        We will respond to all applications within 5 business days.
+      </p>
+    </form>
+
+    <p style="text-align:center;margin-top:24px;font-size:0.84rem;color:var(--soft)">Already have an account? <a href="login.html" style="color:var(--coral);font-weight:600;text-decoration:none">Log in →</a></p>
+  </div>
+</div>
+
+<script src="shared.js"></script>
+<script>
+const form = document.getElementById('regForm');
+const fill = document.getElementById('progressFill');
+const pct  = document.getElementById('progressPct');
+const required = form.querySelectorAll('[required]');
+
+function updateProgress() {
+  let filled = 0;
+  required.forEach(el => { if (el.value && el.value.trim()) filled++; });
+  const percent = Math.round((filled / required.length) * 100);
+  fill.style.width = percent + '%';
+  pct.textContent  = percent + '%';
+}
+form.addEventListener('input', updateProgress);
+form.addEventListener('change', updateProgress);
+
+function handleSubmit(e) {
+  e.preventDefault();
+  showToast('Application submitted — we will be in touch within 5 business days.');
+}
+</script>
+</body>
+</html>
